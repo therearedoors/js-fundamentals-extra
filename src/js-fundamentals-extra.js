@@ -8,7 +8,9 @@
 //
 // TODO: write code below
 
-
+function SecondsInHours(hours){
+  return hours*3600
+}
 
 // MilesTravelled
 //
@@ -23,7 +25,10 @@
 //
 // TODO: write code below
 
+function MilesTravelled(mph, minutes){
 
+  return Math.ceil((minutes/60)*mph)
+}
 
 // KilometersToMiles
 //
@@ -37,7 +42,9 @@
 //
 // TODO: write code below
 
-
+function KilometersToMiles(km){
+  return Math.round(km/1.6)
+}
 
 // MakeSentence
 //
@@ -53,8 +60,15 @@
 //
 // TODO: write code below
 
+function MakeSentence(str){
+  const array = ["!","?","."]
+ // const lastLetter = new RegExp('[\.\?\!]')
 
-
+  if (!array.includes(str[str.length-1])){
+    str += '.'
+  }
+return str.toUpperCase().charAt(0)+str.substring(1)
+}
 // FileExtension
 //
 // Create a function that takes a filename as a string and returns the file extension
@@ -67,7 +81,54 @@
 //
 // TODO: write code below
 
+function FileExtension(filename){
+  for (let i = filename.length-1;i>=0;i--){
+    if (filename[i] === '.'){
+      return filename.substring(i+1)
+    }
+  }
+   return ''
+}
 
+function FileExtension(filename){
+  let record = filename.length
+   for (let i = 0; i < filename.length;i++){
+     if (filename[i] === '.'){
+       record = i+1
+     }
+   }
+  return filename.substring(record)
+ }
+
+function FileExtension(filename){
+  let dotIndex = filename.lastIndexOf('.')
+  return dotIndex > 0
+  ? filename.substring(dotIndex+1)
+  : ""
+}
+
+function FileExtension(filename){
+  let record = filename.length
+     if (filename.includes('.')){
+       record = filename.search(/(?<=\.)[a-z]{2,4}$/)
+     }
+  return filename.substring(record)
+ }
+
+ function FileExtension(filename){
+  let record = filename.length
+   for (let i = 0; i < filename.length;i++){
+     if (filename[i] === '.'){
+      for (let ni = i; ni<filename.length;ni++){
+        if (filename[ni] !== '.'){
+          record = ni
+          break;
+        }
+      }
+    }
+   }
+  return filename.substring(record)
+ }
 
 // Range
 //
@@ -80,7 +141,19 @@
 //
 // TODO: write code below
 
-
+function Range(arr){
+  let highest = 0
+  let lowest = Infinity
+  for (element of arr){
+    if (element > highest){
+      highest = element
+    }
+    if (element < lowest){
+      lowest = element
+    }
+  }
+  return highest - lowest
+}
 
 // CheckTransactions
 //
@@ -99,7 +172,15 @@
 //
 // TODO: write code below
 
-
+function CheckTransactions(transactions,balance=0,overdraft=0){
+  for (transaction of transactions){
+      balance += transaction
+    if (balance < -overdraft){
+      return false
+    }
+  }
+  return true
+}
 
 // FilmsInGenre
 //
@@ -114,31 +195,39 @@
 //
 // TODO: write code below
 
-
+function FilmsInGenre(films, genre){
+  let names = []
+  for (film of films){
+    if (film.genres.includes(genre)){
+        names.push(film.name)
+    }
+  }
+  return names
+}
 
 // TODO: change undefined to be the name of the functions you defined
 module.exports = {
   //SecondsInHours
-  a: undefined,
+  a: SecondsInHours,
 
   //MilesTravelled,
-  b: undefined,  
+  b: MilesTravelled,  
 
   //KilometersToMiles,
-  c: undefined, 
+  c: KilometersToMiles, 
 
   //MakeSentence
-  d: undefined, 
+  d: MakeSentence, 
 
   //FileExtension
-  e: undefined,
+  e: FileExtension,
 
   //Range
-  f: undefined,
+  f: Range,
 
   //CheckTransactions
-  g: undefined,
+  g: CheckTransactions,
 
   //FilmsInGenre
-  h: undefined,
+  h: FilmsInGenre,
 }
